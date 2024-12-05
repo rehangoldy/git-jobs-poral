@@ -1,50 +1,133 @@
-# React + TypeScript + Vite
+# Github Jobs Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern job search application built with React, TypeScript, and Vite that allows users to search and filter job listings from Github Jobs.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Authentication**: Secure login system
+- **Job Search**: 
+  - Search by job description
+  - Filter by location
+  - Filter for full-time positions
+- **Job Listings**:
+  - Paginated display with "Load More" functionality
+  - Detailed job information
+  - Company details and application instructions
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend Framework**: React 18
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **State Management**: Redux Toolkit
+- **UI Library**: Ant Design
+- **Styling**: CSS-in-JS
+- **Authentication**: Auth0
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone [repository-url]
+cd dans_fe
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
 ```
+
+3. Create a `.env` file in the root directory and add your environment variables:
+```env
+VITE_AUTH0_DOMAIN=your-auth0-domain
+VITE_AUTH0_CLIENT_ID=your-auth0-client-id
+```
+
+4. Start the development server:
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+The application will be available at `http://localhost:5173`
+
+## Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── JobCard.tsx     # Individual job listing card
+│   ├── JobDetail.tsx   # Detailed job view
+│   ├── JobFilter.tsx   # Search and filter component
+│   ├── JobList.tsx     # List of job listings
+│   └── NavbarComponent.tsx
+├── stores/             # Redux store configuration
+│   ├── authSlice.ts    # Authentication state management
+│   ├── jobSlice.ts     # Job listings state management
+│   └── store.ts        # Redux store configuration
+├── services/           # API services
+│   └── jobApi.ts       # Job-related API calls
+├── App.tsx             # Main application component
+└── main.tsx           # Application entry point
+```
+
+## Available Scripts
+
+- `npm run dev`: Start development server
+- `npm run build`: Build for production
+- `npm run lint`: Run ESLint
+- `npm run preview`: Preview production build locally
+
+## Features in Detail
+
+### Authentication
+- Implemented using Auth0
+- Secure login/logout functionality
+- Protected routes for authenticated users
+
+### Job Search
+- Real-time search functionality
+- Multiple filter options:
+  - Job description search
+  - Location-based filtering
+  - Full-time position filter
+- Pagination with "Load More" functionality
+
+### Job Details
+- Two-column layout:
+  - Left: Detailed job description
+  - Right: Company information and application instructions
+- Company details including:
+  - Company name
+  - Company logo
+  - Website link
+- Application instructions
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Github Jobs API for providing the job listings data
+- Auth0 for authentication services
+- Ant Design for the UI components
