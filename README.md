@@ -99,9 +99,10 @@ src/
 ### Job Search
 - Real-time search functionality
 - Multiple filter options:
-  - Job description search
-  - Location-based filtering
-  - Full-time position filter
+  - Search by job title or description
+  - Filter by location
+  - Filter by job type (Full-time, Part-time, etc.)
+  - Company name filter
 - Pagination with "Load More" functionality
 
 ### Job Details
@@ -114,6 +115,25 @@ src/
   - Website link
 - Application instructions
 
+### API Integration
+- RESTful API integration
+- Efficient data fetching with axios
+- Error handling and loading states
+- Data caching for improved performance
+
+### User Interface
+- Clean and modern design with Ant Design
+- Responsive layout for all devices
+- Intuitive navigation
+- Loading skeletons for better UX
+- Error boundaries for graceful error handling
+
+### Performance Optimization
+- Code splitting and lazy loading
+- Optimized bundle size
+- Caching strategies
+- Debounced search inputs
+
 ## Contributing
 
 1. Fork the repository
@@ -124,10 +144,15 @@ src/
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for details
+
+## Contact
+
+Your Name - your.email@example.com
+Project Link: [https://github.com/yourusername/dans_fe](https://github.com/yourusername/dans_fe)
 
 ## Acknowledgments
 
-- Github Jobs API for providing the job listings data
-- Auth0 for authentication services
-- Ant Design for the UI components
+* Dans Multi Pro for the project opportunity
+* React TypeScript community
+* Ant Design team for the amazing UI components

@@ -1,20 +1,37 @@
 // src/components/JobDetail.tsx
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Typography, Spin, Alert, } from 'antd';
-import { fetchJobDetail } from '../stores/jobSlice';
+import { Card, Typography, Spin, Alert, Divider } from 'antd';
+import { fetchJobDetail, fetchJobs } from '../stores/jobSlice';
 import type { RootState } from '../stores/store';
 import type { AppDispatch } from '../stores/store';
+import JobCard from './JobCard';
+
 
 
 const { Title, Text, } = Typography;
+const ITEMS_PER_PAGE = 5;
+
 
 const JobDetail = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
   const { currentJob, loading, error } = useSelector((state: RootState) => state.job);
+  const jobState = useSelector((state: RootState) => state.job);
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
+  const { jobs } = jobState;
+
+  const visibleJobs = useMemo(() => {
+    return jobs.slice(0, visibleCount);
+  }, [jobs, visibleCount]);
+
+  useEffect(() => {
+    if (jobs.length === 0) {
+      dispatch(fetchJobs());
+    }
+  }, []);
   useEffect(() => {
     if (id) {
       dispatch(fetchJobDetail(id));
@@ -61,9 +78,9 @@ const JobDetail = () => {
         {/* Right column - Company Info and How to Apply */}
         <div style={{ flex: '1 1 35%' }}>
           {/* Company Info Box */}
-          <Card 
+          <Card
             title={currentJob.company}
-            style={{ 
+            style={{
               marginBottom: '20px',
               border: '2px solid #d9d9d9'
             }}
@@ -90,15 +107,28 @@ const JobDetail = () => {
           </Card>
 
           {/* How to Apply Box */}
-          <Card 
-            title="How to Apply" 
-            style={{ 
+          <Card
+            title="How to Apply"
+            style={{
               border: '2px solid #d9d9d9'
             }}
           >
             <div
               dangerouslySetInnerHTML={{ __html: currentJob.how_to_apply || '' }}
             />
+          </Card>
+
+          <Card title="Recomended Jobs">
+
+            <ul>
+              {visibleJobs.map((job, index) => (
+                <div key={`${job.id}-${job.created_at}`}>
+                  <JobCard {...job} />
+                  {index < visibleJobs.length - 1 && <Divider style={{ margin: '12px 0' }} />}
+                </div>
+              ))}
+            </ul>
+
           </Card>
         </div>
       </div>
